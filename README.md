@@ -22,11 +22,16 @@ Version 0.1
 
 UnRoamify is an application that you can use to take ownership of folders and delete those folders. You aknowledge that by using this application, there is a potential risk of data loss, so use it at your own risk. I am not responsible for anything that happens to anyone or to anything from the use of this application. 
 
+
 I made UnRoamify to delete roaming profiles of Active Directory users (hence the name). This tool is an automated equivalent of making batch files (or running commands directly into CMD or PowerShell as Administrator) with:
 
+
 "takeown /f  P:ath/to/profiles/username.folder /r /d y"
+
 "icacls P:/ath/to/profiles/username.folder /grant administrators:F /t"
+
 "rd P:/ath/to/profiles/username.folder /S /Q"
+
 
 But instead of you writing the name of every user, you just push a button and it does it for you. READ THE INSTRUCTIONS ! IT'S VERY IMPORTANT YOU GET TO KNOW HOW THE APP WORKS BEFORE YOU USE IT IN PRODUCTION (PLEASE HAVE COMMON SENSE !).
 
@@ -34,11 +39,16 @@ You can find this app on Github @ <to be filled with link>
 
 
 
+
 Disclaimer: I am not a professional programmer and I am very aware that what I did is mostly spaghetti code, so again, use it at your own risk.
+
 
 UnRoamify has a few modes in which it deletes profiles. You have the nuclear options with which you delete all profiles after you upgraded all Windows versions in the domain. You also got a manual deletion to help you with deleting corrupted profiles.
 
+
 As for the automatic deletion, there are 2 options, both only work if you use in AD Profile Path the nomenclature \\server\profiles$\%username%: one in which UnRoamify compares the folders on the server with the usernames in AD , or one in which UnRoamify compares the name of the folders with the name found in the profile path in AD. Both have their drawbacks (also mentioned in the instructions): if you use "Delete by Profile", UnRoamify does an AD query in which it can only get by default a maximum number of 1000 users (I think you can modify it somehow, haven't read into it). If you have more than 1000 users in AD, it may delete all the users that weren't returned in the query. If you use "Delete by User" UnRoamify will check profile by profile to see if the name of the folder matches a username in AD, if it doesn't, it deletes it. The problem is when the username got renamed, but maintained the old username in the profile path, in which case, this option deletes the roaming folder even if it is being used.
+
+
 
 
 Story Time (you can ignore this, it's just ramble)
